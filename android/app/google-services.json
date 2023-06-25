@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "665428329103",
+    "project_id": "hoost-mvp",
+    "storage_bucket": "hoost-mvp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:665428329103:android:81f551ed48c978a76a66fa",
+        "android_client_info": {
+          "package_name": "com.example.hoost_mvp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "665428329103-sc5pk82p8jnofa7lq3u6af5drbm5sbb6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBLLc0pn0NbvKEeWvLtL4hEX32NMyWm_F8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "665428329103-sc5pk82p8jnofa7lq3u6af5drbm5sbb6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
