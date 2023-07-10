@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:hoost_mvp/model/user_model.dart';
 import 'package:hoost_mvp/provider/auth_provider.dart';
@@ -9,14 +10,14 @@ import 'package:hoost_mvp/utils/utils.dart';
 import 'package:hoost_mvp/widgets/custom_button.dart';
 import 'package:provider/provider.dart';
 
-class UserInfromationScreen extends StatefulWidget {
-  const UserInfromationScreen({super.key});
+class FeedScreen extends StatefulWidget {
+  const FeedScreen({super.key});
 
   @override
-  State<UserInfromationScreen> createState() => _UserInfromationScreenState();
+  State<FeedScreen> createState() => _Feed();
 }
 
-class _UserInfromationScreenState extends State<UserInfromationScreen> {
+class _Feed extends State<FeedScreen> {
   File? image;
   final nameController = TextEditingController();
   final emailController = TextEditingController();
@@ -40,86 +41,66 @@ class _UserInfromationScreenState extends State<UserInfromationScreen> {
   Widget build(BuildContext context) {
     final isLoading =
         Provider.of<AuthProvider>(context, listen: true).isLoading;
+    final ap = Provider.of<AuthProvider>(context, listen: true);
+    final CollectionReference _post =
+        FirebaseFirestore.instance.collection('posts');
+    final query = _post.where("uidUser", isNotEqualTo: ap.uid);
     return Scaffold(
-      body: SafeArea(
-        child: isLoading == true
-            ? const Center(
-                child: CircularProgressIndicator(
-                  color: Colors.purple,
-                ),
-              )
-            : SingleChildScrollView(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 25.0, horizontal: 5.0),
-                child: Center(
-                  child: Column(
-                    children: [
-                      InkWell(
-                        onTap: () => selectImage(),
-                        child: image == null
-                            ? const CircleAvatar(
-                                backgroundColor: Colors.purple,
-                                radius: 50,
-                                child: Icon(
-                                  Icons.account_circle,
-                                  size: 50,
-                                  color: Colors.white,
-                                ),
-                              )
-                            : CircleAvatar(
-                                backgroundImage: FileImage(image!),
-                                radius: 50,
-                              ),
-                      ),
-                      Container(
-                        width: MediaQuery.of(context).size.width,
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 5, horizontal: 15),
-                        margin: const EdgeInsets.only(top: 20),
-                        child: Column(
+       appBar: AppBar(
+          title: const Center(child: Text("Fil d'actualité")),
+        ),
+      body: StreamBuilder(
+        stream: query.snapshots(),
+        builder: (context, AsyncSnapshot<QuerySnapshot> streamSnapshot) {
+          if (streamSnapshot.hasData) {
+            return ListView.builder(
+              itemCount: streamSnapshot.data!.docs.length,
+              itemBuilder: (context, index) {
+                final DocumentSnapshot documentSnapshot =
+                    streamSnapshot.data!.docs[index];
+                final String yearDebut =
+                    DateTime.parse(documentSnapshot['date_debut'])
+                        .year
+                        .toString();
+                final String monthDebut =
+                    DateTime.parse(documentSnapshot['date_debut'])
+                        .month
+                        .toString();
+                final String yearFin =
+                    DateTime.parse(documentSnapshot['date_fin'])
+                        .year
+                        .toString();
+                final String monthFin =
+                    DateTime.parse(documentSnapshot['date_fin'])
+                        .month
+                        .toString();
+                return Card(
+                  margin: const EdgeInsets.all(10),
+                  child: ListTile(
+                    title: Text(documentSnapshot['lieu']),
+                    subtitle: Text(documentSnapshot['description'] +
+                        ' Durée : ' + yearDebut + ' - ' + monthDebut + ' à ' + yearFin + ' - ' + monthFin),
+                        trailing: SizedBox(
+                        width: 50,
+                        child: Row(
                           children: [
-                            // name field
-                            textFeld(
-                              hintText: "John Smith",
-                              icon: Icons.account_circle,
-                              inputType: TextInputType.name,
-                              maxLines: 1,
-                              controller: nameController,
-                            ),
-
-                            // email
-                            textFeld(
-                              hintText: "abc@example.com",
-                              icon: Icons.email,
-                              inputType: TextInputType.emailAddress,
-                              maxLines: 1,
-                              controller: emailController,
-                            ),
-
-                            // bio
-                            textFeld(
-                              hintText: "Enter your bio here...",
-                              icon: Icons.edit,
-                              inputType: TextInputType.name,
-                              maxLines: 2,
-                              controller: bioController,
-                            ),
+                            IconButton(
+                                icon: const Icon(Icons.message),
+                                onPressed: () => {}),                            
                           ],
                         ),
                       ),
-                      const SizedBox(height: 20),
-                      SizedBox(
-                        height: 50,
-                        width: MediaQuery.of(context).size.width * 0.90,
-                        child: CustomButton(
-                          text: "Continue",
-                          onPressed: () => storeData(),
-                        ),
-                      )
-                    ],
+
                   ),
-                ),
-              ),
+                );
+              },
+            );
+          }
+
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        },
       ),
     );
   }
@@ -197,7 +178,8 @@ class _UserInfromationScreenState extends State<UserInfromationScreen> {
                           context,
                           MaterialPageRoute(
                             // builder: (context) => const HomeScreen(),
-                            builder: (context) => const BottomNavigationBarExample(),
+                            builder: (context) =>
+                                const BottomNavigationBarExample(),
                           ),
                           (route) => false),
                     ),

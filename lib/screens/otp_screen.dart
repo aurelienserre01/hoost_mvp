@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:hoost_mvp/provider/auth_provider.dart';
-import 'package:hoost_mvp/screens/home_screen.dart';
 import 'package:hoost_mvp/screens/user_information_screen.dart';
 import 'package:hoost_mvp/utils/utils.dart';
 import 'package:hoost_mvp/widgets/custom_button.dart';
 import 'package:pinput/pinput.dart';
 import 'package:provider/provider.dart';
+
+import '../utils/bottom_bar.dart';
 
 class OtpScreen extends StatefulWidget {
   final String verificationId;
@@ -157,7 +158,8 @@ class _OtpScreenState extends State<OtpScreen> {
                                 (value) => Navigator.pushAndRemoveUntil(
                                     context,
                                     MaterialPageRoute(
-                                      builder: (context) => const HomeScreen(),
+                                      // builder: (context) => const HomeScreen(),
+                                      builder: (context) => const BottomNavigationBarExample(),
                                     ),
                                     (route) => false),
                               ),

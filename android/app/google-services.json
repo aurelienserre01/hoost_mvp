@@ -1,33 +1,49 @@
 {
   "project_info": {
-    "project_number": "665428329103",
-    "project_id": "hoost-mvp",
-    "storage_bucket": "hoost-mvp.appspot.com"
+    "project_number": "486509494815",
+    "project_id": "hoost-mvp-6e3a4",
+    "storage_bucket": "hoost-mvp-6e3a4.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:665428329103:android:81f551ed48c978a76a66fa",
+        "mobilesdk_app_id": "1:486509494815:android:14b64c461980cdd9810b2a",
         "android_client_info": {
           "package_name": "com.example.hoost_mvp"
         }
       },
       "oauth_client": [
         {
-          "client_id": "665428329103-sc5pk82p8jnofa7lq3u6af5drbm5sbb6.apps.googleusercontent.com",
+          "client_id": "486509494815-jbgfi0cs9j1lgujrst0q089hfn93bc9r.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.hoost_mvp",
+            "certificate_hash": "05a02e654d7aa0236ec8b1080540732a19fa86df"
+          }
+        },
+        {
+          "client_id": "486509494815-sl2ea0tmucpu44s6pshkbd45vibmp343.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.hoost_mvp",
+            "certificate_hash": "c56bb6db7f00c7902e4b63df03e5aa1cd659bf07"
+          }
+        },
+        {
+          "client_id": "486509494815-mticg98k9l4jljouh21e0itilhp0k64g.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBLLc0pn0NbvKEeWvLtL4hEX32NMyWm_F8"
+          "current_key": "AIzaSyATgGsMDIOILQIdW4YjcK0QgEhbo9PQ7FM"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "665428329103-sc5pk82p8jnofa7lq3u6af5drbm5sbb6.apps.googleusercontent.com",
+              "client_id": "486509494815-mticg98k9l4jljouh21e0itilhp0k64g.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

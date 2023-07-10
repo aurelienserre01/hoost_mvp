@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hoost_mvp/provider/auth_provider.dart';
+import 'package:hoost_mvp/screens/postAdd_screen.dart';
 import 'package:hoost_mvp/screens/welcome_screen.dart';
 import 'package:provider/provider.dart';
 
@@ -17,8 +18,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.purple,
-        title: const Text("FlutterPhone Auth"),
+        backgroundColor: Colors.blue,
+        title: const Text("Hoost"),
         actions: [
           IconButton(
             onPressed: () {
@@ -50,6 +51,15 @@ class _HomeScreenState extends State<HomeScreen> {
           Text(ap.userModel.phoneNumber),
           Text(ap.userModel.email),
           Text(ap.userModel.bio),
+          ElevatedButton(
+          child: const Text('Open route'),
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const InsertData()),
+            );
+          },
+        ),
         ],
       )),
     );
